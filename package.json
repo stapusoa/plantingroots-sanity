@@ -7,7 +7,10 @@
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
+    "dev:staging": "dotenv -e .env.staging -- sanity dev",
     "build": "sanity build",
+    "build:production": "dotenv -e .env.production -- sanity build",
+    "build:staging": "dotenv -e .env.staging -- sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy"
   },
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
     "@types/react": "^19.1",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9.28",
     "prettier": "^3.5",
     "typescript": "^5.8"

@@ -14,6 +14,8 @@
 # Logs
 /logs
 *.log
+.env.staging
+.env.production
 
 # Coverage directory used by testing tools
 /coverage
