@@ -17,10 +17,7 @@ export const page = defineType({
       name: "slug",
       title: "Page URL",
       type: "slug",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
+      options: { source: "title", maxLength: 96 },
     }),
     defineField({
       name: "metaDescription",
@@ -28,81 +25,95 @@ export const page = defineType({
       type: "text",
       description: "SEO meta description (150–160 chars).",
     }),
-    defineField({
-      name: "h1",
-      title: "H1 Tag",
-      type: "string",
-      description: "Main heading of the page.",
-    }),
-    defineField({
-      name: "h2s",
-      title: "H2 Tags",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "Subheadings for content sections.",
-    }),
-    defineField({
-      name: "body",
-      title: "Body Content",
-      type: "array",
-      of: [{ type: "block" }],
-    }),
 
-    // Images
+    // Hero section
     defineField({
-      name: "images",
-      title: "Images",
-      type: "array",
-      of: [
-        {
-          type: "image",
-          fields: [
-            {
-              name: "alt",
-              type: "string",
-              title: "Alt Text",
-              description:
-                "Describe the image for accessibility and SEO.",
-            },
-          ],
-        },
-      ],
-    }),
-
-    // Call to Action
-    defineField({
-      name: "cta",
-      title: "CTA",
+      name: "hero",
+      title: "Hero Section",
       type: "object",
       fields: [
-        { name: "text", title: "Button Text", type: "string" },
-        { name: "url", title: "Link URL", type: "url" },
+        defineField({ name: "title", title: "Title", type: "string" }),
+        defineField({
+          name: "titleAlignment",
+          title: "Title Alignment",
+          type: "string",
+          options: { list: ["left", "center"], layout: "radio" },
+        }),
+        defineField({ name: "subheader", title: "Subtitle / Description", type: "text" }),
+        defineField({
+          name: "subheaderAlignment",
+          title: "Subtitle Alignment",
+          type: "string",
+          options: { list: ["left", "center"], layout: "radio" },
+        }),
+        defineField({ name: "ctaText", title: "Button Text", type: "string" }),
+        defineField({ name: "ctaLink", title: "Button Link", type: "url" }),
+        defineField({ name: "heroImageSM", title: "Hero Image Small", type: "image" }),
+        defineField({ name: "heroImageMD", title: "Hero Image Medium", type: "image" }),
+        defineField({ name: "heroImageLG", title: "Hero Image Large", type: "image" }),
       ],
     }),
 
-    // Keywords
+    // Content blocks
     defineField({
-      name: "keywords",
-      title: "Keywords",
+      name: "content",
+      title: "Page Content",
       type: "array",
-      of: [{ type: "string" }],
-      description: "Optional SEO keywords.",
+      of: [
+        defineField({
+          type: "object",
+          name: "textBlock",
+          title: "Text Block",
+          fields: [
+            defineField({ name: "heading", title: "Heading", type: "string" }),
+            defineField({
+              name: "headingLevel",
+              title: "Heading Level",
+              type: "string",
+              options: { list: ["h2", "h3", "h4", "h5", "h6"] },
+            }),
+            defineField({
+              name: "headingAlignment",
+              title: "Heading Alignment",
+              type: "string",
+              options: { list: ["left", "center"], layout: "radio" },
+            }),
+            defineField({ name: "body", title: "Body Text", type: "array", of: [{ type: "block" }] }),
+            defineField({
+              name: "textAlignment",
+              title: "Text Alignment",
+              type: "string",
+              options: { list: ["left", "center"], layout: "radio" },
+            }),
+          ],
+        }),
+        defineField({
+          type: "image",
+          name: "imageBlock",
+          title: "Image Block",
+          fields: [
+            defineField({ name: "alt", title: "Alt Text", type: "string" }),
+            defineField({
+              name: "alignment",
+              title: "Image Alignment",
+              type: "string",
+              options: { list: ["left", "center", "right"], layout: "radio" },
+            }),
+          ],
+        }),
+      ],
     }),
 
     // Optional SEO fields
-    defineField({
-      name: "canonicalUrl",
-      title: "Canonical URL",
-      type: "url",
-      description: "Canonical link for this page (avoid duplicate content).",
-    }),
+    defineField({ name: "canonicalUrl", title: "Canonical URL", type: "url" }),
     defineField({
       name: "robots",
-      title: "Robots.txt",
+      title: "Robots",
       type: "string",
-      description: "Optional: e.g., index, noindex, follow, nofollow",
+      options: { list: ["index, follow", "noindex, nofollow"], layout: "radio" },
     }),
   ],
+
   preview: {
     select: {
       title: "title",
