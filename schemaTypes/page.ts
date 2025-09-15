@@ -89,8 +89,8 @@ export const page = defineType({
         }),
         defineField({
           type: "image",
-          name: "imageBlock",
-          title: "Image Block",
+          name: "image",
+          title: "Image",
           fields: [
             defineField({ name: "alt", title: "Alt Text", type: "string" }),
             defineField({
