@@ -1,18 +1,18 @@
 import { defineType, defineField } from "sanity";
 
-export const image = defineType({
-  name: "image",
-  title: "Image",
+export const images = defineType({
+  name: "images",   // 👈 internal type name
+  title: "Images",  // 👈 display label in Studio
   type: "image",
   options: {
-    hotspot: true, // enables focal point selection
+    hotspot: true, // allows cropping & focal point
   },
   fields: [
     defineField({
       name: "alt",
       title: "Alt Text",
       type: "string",
-      description: "Describe the image for accessibility and SEO",
+      description: "Important for SEO and accessibility",
     }),
     defineField({
       name: "caption",
@@ -25,10 +25,13 @@ export const image = defineType({
       title: "Image Alignment",
       type: "string",
       options: {
-        list: ["left", "center", "right"],
+        list: [
+          { title: "Left", value: "left" },
+          { title: "Center", value: "center" },
+          { title: "Right", value: "right" },
+        ],
         layout: "radio",
       },
-      description: "Controls how the image is aligned in the content",
     }),
   ],
 });
